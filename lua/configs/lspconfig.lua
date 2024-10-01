@@ -101,3 +101,39 @@ lspconfig.pylsp.setup {
     },
   }
 }
+
+-- Rust personalized config
+lspconfig.rust_analyzer.setup {
+  on_attach = function(client, bufnr)
+    nvlsp.on_attach(client, bufnr)
+    -- Set up format on save
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ timeout_ms = 2000 })
+      end,
+    })
+  end,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  settings = {
+    ["rust-analyzer"] = {
+      assist = {
+        importGranularity = "module",
+        importPrefix = "self",
+      },
+      cargo = {
+        loadOutDirsFromCheck = true
+      },
+      procMacro = {
+        enable = true
+      },
+      checkOnSave = {
+        command = "clippy"
+      },
+      diagnostics = {
+        enable = true
+      }
+    }
+  }
+}
