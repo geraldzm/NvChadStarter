@@ -36,13 +36,16 @@ lspconfig.ts_ls.setup {
       preferences = {
         importModuleSpecifier = "non-relative"
       }
-   }
+    },
+    diagnostics = {
+      enable = true,
+    },
   },
   init_options = {
     preferences = {
       importModuleSpecifier = "non-relative"
     }
-  }
+  },
 }
 
 -- golang personalized config
@@ -74,16 +77,17 @@ lspconfig.gopls.setup {
 
 -- python personalized config 
 lspconfig.pylsp.setup {
-  on_attach = function(client, bufnr)
-    nvlsp.on_attach(client, bufnr)
-    -- Set up format on save
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format({ timeout_ms = 2000 })
-      end,
-    })
-  end,
+  on_attach = nvlsp.on_attach,
+  -- on_attach = function(client, bufnr)
+  --   nvlsp.on_attach(client, bufnr)
+  --   -- Set up format on save
+  --   vim.api.nvim_create_autocmd("BufWritePre", {
+  --     buffer = bufnr,
+  --     callback = function()
+  --       vim.lsp.buf.format({ timeout_ms = 2000 })
+  --     end,
+  --   })
+  -- end,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
   settings = {
