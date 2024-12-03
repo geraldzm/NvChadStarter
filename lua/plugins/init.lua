@@ -91,6 +91,8 @@ return {
         -- Navigation
         map("n", "<leader>ph", gs.preview_hunk, { desc = "Preview git hunk" })
         map("n", "<leader>rh", gs.reset_hunk, { desc = "Reset git hunk" })
+        map("n", "]h", gs.next_hunk, { desc = "Next git hunk" })
+        map("n", "[h", gs.prev_hunk, { desc = "Previous git hunk" })
       end,
     },
   },
