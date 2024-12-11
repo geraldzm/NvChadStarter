@@ -33,7 +33,7 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- Typescript personalized config 
+-- Typescript personalized config
 lspconfig.ts_ls.setup {
   on_attach = function(client, bufnr)
     nvlsp.on_attach(client, bufnr)
@@ -41,7 +41,7 @@ lspconfig.ts_ls.setup {
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
       callback = function()
-        vim.lsp.buf.format({ timeout_ms = 2000 })
+        vim.lsp.buf.format { timeout_ms = 2000 }
       end,
     })
   end,
@@ -50,8 +50,8 @@ lspconfig.ts_ls.setup {
   settings = {
     typescript = {
       preferences = {
-        importModuleSpecifier = "non-relative"
-      }
+        importModuleSpecifier = "non-relative",
+      },
     },
     diagnostics = {
       enable = true,
@@ -59,8 +59,8 @@ lspconfig.ts_ls.setup {
   },
   init_options = {
     preferences = {
-      importModuleSpecifier = "non-relative"
-    }
+      importModuleSpecifier = "non-relative",
+    },
   },
 }
 
@@ -72,7 +72,7 @@ lspconfig.gopls.setup {
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
       callback = function()
-        vim.lsp.buf.format({ timeout_ms = 2000 })
+        vim.lsp.buf.format { timeout_ms = 2000 }
       end,
     })
   end,
@@ -91,7 +91,7 @@ lspconfig.gopls.setup {
   },
 }
 
--- python personalized config 
+-- python personalized config
 lspconfig.pylsp.setup {
   on_attach = nvlsp.on_attach,
   -- on_attach = function(client, bufnr)
@@ -110,16 +110,16 @@ lspconfig.pylsp.setup {
     pylsp = {
       plugins = {
         pycodestyle = {
-          ignore = {'W391', 'E302'},
-          maxLineLength = 150
-        }
-      }
+          ignore = { "W391", "E302" },
+          maxLineLength = 150,
+        },
+      },
     },
     black = {
       enabled = true,
       line_length = 150,
     },
-  }
+  },
 }
 
 -- Rust personalized config
@@ -130,7 +130,7 @@ lspconfig.rust_analyzer.setup {
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
       callback = function()
-        vim.lsp.buf.format({ timeout_ms = 2000 })
+        vim.lsp.buf.format { timeout_ms = 2000 }
       end,
     })
   end,
@@ -143,17 +143,17 @@ lspconfig.rust_analyzer.setup {
         importPrefix = "self",
       },
       cargo = {
-        loadOutDirsFromCheck = true
+        loadOutDirsFromCheck = true,
       },
       procMacro = {
-        enable = true
+        enable = true,
       },
       checkOnSave = {
-        command = "clippy"
+        command = "clippy",
       },
       diagnostics = {
-        enable = true
-      }
-    }
-  }
+        enable = true,
+      },
+    },
+  },
 }
