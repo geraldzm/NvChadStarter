@@ -4,6 +4,22 @@ require("nvchad.configs.lspconfig").defaults()
 
 local lspconfig = require "lspconfig"
 
+-- This block disables completion during rename
+local cmp = require "cmp"
+local original_complete = cmp.complete
+vim.lsp.handlers["textDocument/rename"] = function(_, result, _)
+  -- Temporarily disable completion
+  cmp.complete = function() end
+
+  -- If there's a result, apply it
+  if result then
+    vim.lsp.util.apply_workspace_edit(result, "utf-8")
+  end
+
+  -- Restore the original complete function
+  cmp.complete = original_complete
+end
+
 -- EXAMPLE
 local servers = { "html", "cssls", "pylsp", "gopls", "ts_ls" }
 local nvlsp = require "nvchad.configs.lspconfig"
